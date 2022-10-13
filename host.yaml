@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Pod
+metadata:
+        name: hostdir-vol
+spec:
+        containers:
+                - name: emptycontainer
+                  image: nginx
+                  volumeMounts:
+                           - name: host-vol
+                             mountPath: /host
+
+
+        volumes:
+                - name: host-vol
+                  hostPath:
+                          path: /kuber

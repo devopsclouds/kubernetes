@@ -1,0 +1,10 @@
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: first-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 10.143.210.22/24
+  - 10.143.210.240-10.143.210.250
+  - fc00:f853:0ccd:e799::/124

@@ -1,0 +1,14 @@
+apiVersion: v1 
+kind: Pod    
+metadata:   
+  name:  ngnix-pod 
+  labels:     
+     app: ngnix
+     tier: dev
+spec:
+  containers:
+  - name: ngnix-container
+    image: nginx
+    imagePullPolicy: Always
+    command: ['sh', '-c', 'echo "Hello, Kubernetes!" && cat /kube']
+  restartPolicy: OnFailure
