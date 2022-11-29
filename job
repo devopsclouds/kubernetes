@@ -1,0 +1,59 @@
+ls
+
+kubernetes job -  when the job should be there unitl its completed
+
+suppose if the pod is deleted it will recreate the again until the job should be execute
+
+if the pod fails the job will run another pod until the  job should be execute
+
+completions(non parrallel) -  if you specify 2 it will execute 2 jobs one after another
+
+parallelism - if you specify 2 it will execute 2 jobs at a same time
+
+backofflimit --  if you specify 3 , the iteration wil occur 4 pod fails then it will stops the job
+
+activedeadlineseconds --- i dont want the job to long runner if you specify the time limit the time limit excedes then it will not run 
+
+
+
+cronjob --- it will run the job on the  specific time
+
+
+successfuljobhistorylimit  ---- if u specify 2 the 2 succesfull jobs will be there
+
+failedjobhistorylimit --- f u specify 2 the 2 failed  jobs will be there
+
+
+
+suspend if you specify true the job will be suspend
+
+
+
+how to delete jobs automatic
+in the job spec ttlsecafterfinishedjobs: 10
+aftercjob completion it will wait 10 sec then the job will delete
+
+
+
+
+
+init container - init container runs before the actual container run . if th init container sucessfull executed then only process with actual container. if the init container fails it will not start actual container , if fails it will restart the init container again
+
+if you have multiple init  container it will start the sequences one init container another
+
+
+pause container -pause container is the container that hold all the containers of a pod together
+pause container is always created before the mai container
+
+pause container is infrastracure container whose sole purpose to all these namespaces
+
+all user defined containers of the pod then use the namespace of the pod infrastracure container
+
+when u stop pause container the kubernetes detects the pod is unhealty and it will recreate again the pod then ipaddress will change
+
+when u stop main container it will not affect to pod but restart increment no ipaddress will change
+
+
+
+
+

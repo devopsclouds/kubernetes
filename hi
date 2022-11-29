@@ -1,0 +1,67 @@
+pluto in kubernetes
+Pluto is a utility to help users find deprecated Kubernetes apiVersions in their code repositories and their helm releases.
+
+install pluto
+sudo wget https://github.com/FairwindsOps/pluto/releases/download/v5.11.2/pluto_5.11.2_linux_amd64.tar.gz
+
+sudo tar zxf pluto_5.11.2_linux_amd64.tar.gz
+
+sudo mv pluto /usr/local/bin
+
+pluto detect Checks a single file or stdin for deprecated apiVersions.
+
+pluto detect-files - detect the file api-versions in current directory
+
+
+
+
+
+
+KUbernetes dashboard
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.6.1/aio/deploy/recommended.yaml
+
+
+╰─ kubectl edit svc kubernetes-dashboard -n kubernetes-dashboard
+change to nodeport to access the dashboard application
+
+using the nodeipaddress with port number to access kubernetes dashboard
+
+then create the service account in sa_cluster_admin.yaml in kube-system namespace
+
+kubectl -n kube-system get sa | grep dashboard-admin  --- then search the service account dashboard-admin
+
+in this service account  to create token and to authenicate kubernetes dashboard
+
+kubectl create token dashboard-admin -n kube-system
+copy the token abd authenicate dashboard
+
+
+
+
+kubernetes horizontal autoscaller
+
+In Kubernetes, a HorizontalPodAutoscaler automatically updates a workload resource (such as a Deployment or StatefulSet), with the aim of automatically scaling the workload to match demand.
+
+Horizontal scaling means that the response to increased load is to deploy more Pods. This is different from vertical scaling, which for Kubernetes would mean assigning more resources (for example: memory or CPU) to the Pods that are already running for the workload.
+
+If the load decreases, and the number of Pods is above the configured minimum, the HorizontalPodAutoscaler instructs the workload resource (the Deployment, StatefulSet, or other similar resource) to scale back down.
+
+
+metric server - metric server collect the metrics in your pod like cpu , memory 
+every 15 seconds it will keep checking the metrics
+
+we have to instal metrics server in kubernetes cluster
+
+3 minutes to scale up the pods, when the cpu or memory limit exceeds
+
+ 5 minutes to scale down the pods 
+ 
+ kubectl autoscale deploy nginx --min=1 --max=4 --cpu-percent 20
+ 
+siege -q -c 5 -t 2m http://kworker1:30528  -- user requests increases then cpu goes high.this for testing
+
+stress --vm 2 --vm-bytes 200M   ---- the memory performances increases
+
+
+
+
