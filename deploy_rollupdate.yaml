@@ -1,19 +1,21 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  annotations:
+    kubernetes.io/change-cause: "1.12"      
   labels:
     run: nginx
   name: nginx-deploy
 spec:
-  replicas: 4
+  replicas: 6
   selector:
     matchLabels:
       run: nginx
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 0
-      maxUnavailable: 1
+      maxSurge: 4
+      maxUnavailable: 2
   minReadySeconds: 5
   revisionHistoryLimit: 10
   template:
@@ -22,6 +24,6 @@ spec:
         run: nginx
     spec:
       containers:
-      - image: nginx
+      - image: nginx:1.12
         name: nginx
         #command: ['sh', '-c', 'echo "hello" > /var/www/html/index.html']
